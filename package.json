@@ -11,7 +11,7 @@
     "format": "prettier --ignore-unknown --write ./src",
     "lint": "eslint src --fix",
     "test": "NODE_ENV=test jest",
-    "run": "ts-node ./src/index.ts",
+    "convert": "ts-node ./src/cli.ts",
     "prepare": "husky install"
   },
   "engines": {
