@@ -1,0 +1,43 @@
+{
+  "name": "swag-def-gen",
+  "description": "Generate swagger definition object",
+  "version": "1.0.0",
+  "private": true,
+  "repository": "git@github.com:ripjar/ripjar-mongo.git",
+  "prettier": "@ripjar/prettier-config",
+  "scripts": {
+    "build": "tsc",
+    "check": "tsc --noEmit",
+    "format": "prettier --ignore-unknown --write ./src",
+    "lint": "eslint src --fix",
+    "test": "NODE_ENV=test jest",
+    "prepare": "husky install"
+  },
+  "engines": {
+    "node": ">=12.9.0"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "@ripjar/prettier-config": "git+ssh://git@github.com:ripjar/prettier-config.git#master",
+    "@types/jest": "^28.1.6",
+    "@types/node": "^12.20.54",
+    "@typescript-eslint/eslint-plugin": "^5.33.0",
+    "@typescript-eslint/parser": "^5.33.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint": "^7.32.0 || ^8.2.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "husky": "^7",
+    "jest": "^28.1.3",
+    "lint-staged": "^12",
+    "prettier": "^2.7.1",
+    "ts-node": "^10.9.1",
+    "ts-jest": "^28.0.7",
+    "typescript": "^4.7"
+  },
+  "lint-staged": {
+    "src/**/*.{ts,js,json,md}": "prettier --write --ignore-unknown"
+  }
+}
