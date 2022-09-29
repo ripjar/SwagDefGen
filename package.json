@@ -11,17 +11,20 @@
     "format": "prettier --ignore-unknown --write ./src",
     "lint": "eslint src --fix",
     "test": "NODE_ENV=test jest",
+    "run": "ts-node ./src/index.ts",
     "prepare": "husky install"
   },
   "engines": {
     "node": ">=12.9.0"
   },
   "dependencies": {
+    "js-yaml": "^4.1.0"
   },
   "devDependencies": {
     "@ripjar/prettier-config": "git+ssh://git@github.com:ripjar/prettier-config.git#master",
     "@types/jest": "^28.1.6",
     "@types/node": "^12.20.54",
+    "@types/js-yaml": "^4.0.5",
     "@typescript-eslint/eslint-plugin": "^5.33.0",
     "@typescript-eslint/parser": "^5.33.0",
     "eslint-config-prettier": "^8.5.0",
