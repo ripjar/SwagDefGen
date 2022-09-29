@@ -1,40 +1,31 @@
-export default function convertObject(obj:Record<string,any>) {
-    /* 
-    Append to 'outSwagger' string with Swagger schema attributes relative to given object
-    Global variables updated: 
-    -outSwagger
-    */
+import convertNull, { NullYaml } from "./converNull";
+import convertNumber, { NumberYaml } from "./convertNumber";
+import convertString, { StringYaml } from "./convertString";
+import { ConvertOptions } from "./interface/ConvertOptions";
 
-    //Convert null attributes to given type
-    if (obj === null) {
-      outSwagger +=
-        indentator +
-        '"type": "' +
-        document.getElementById("nullType").value +
-        '",';
-      outSwagger += indentator + '"format": "nullable"';
-      return;
-    }
-    // ---- Begin properties scope ----
-    outSwagger += indentator + '"type": "object",';
-    outSwagger += indentator + '"properties": {';
-    changeIndentation(tabCount + 1);
-    //For each attribute inside that object
-    for (var prop in obj) {
-      // ---- Begin property type scope ----
-      outSwagger += indentator + '"' + prop + '": {';
-      conversorSelection(obj[prop]);
-      outSwagger += indentator + "},";
-      // ---- End property type scope ----
-    }
+export type AnyYaml = ObjectYaml | NumberYaml | StringYaml | NullYaml;
 
-    changeIndentation(tabCount - 1);
-    if (Object.keys(obj).length > 0) {
-      //At least 1 property inserted
-      outSwagger = outSwagger.substring(0, outSwagger.length - 1); //Remove last comma
-      outSwagger += indentator + "}";
-    } else {
-      // No property inserted
-      outSwagger += " }";
-    }
-  }
+export interface ObjectYaml {
+  type: "object";
+  properties: Record<string, AnyYaml>;
+}
+
+function conversion(v: any, options: ConvertOptions): AnyYaml {
+  if (v === null) return convertNull(v, options);
+  if (typeof v === "number") return convertNumber(v, options);
+  if (typeof v === "string") return convertString(v, options);
+  return convertObject(v as Record<string, any>, options);
+}
+
+export default function convertObject(
+  obj: Record<string, any>,
+  options: ConvertOptions,
+): ObjectYaml {
+  const result = Object.keys(obj).reduce((prev, cur) => {
+    return { ...prev, [cur]: conversion(obj[cur], options) };
+  }, {} as Record<string, AnyYaml>);
+  return {
+    type: "object",
+    properties: result,
+  };
+}
