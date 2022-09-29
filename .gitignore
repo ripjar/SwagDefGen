@@ -63,3 +63,5 @@ typings/
 .DS_STORE
 *.tsbuildinfo
 dist/
+src/*.json
+src/*.yaml
