@@ -1,14 +1,14 @@
-export default function convertArray(obj: any[]) {
-  /* 
-    Append to 'outSwagger' string with Swagger schema attributes relative to given array
-    Global variables updated: 
-    -outSwagger
-    */
+import anyConversion, { AnyYaml } from "./anyConversion";
+import { ConvertOptions } from "./interface/ConvertOptions";
 
-  outSwagger += indentator + '"type": "array",';
-  // ---- Begin items scope ----
-  outSwagger += indentator + '"items": {';
-  conversorSelection(obj);
-  outSwagger += indentator + "}";
-  // ---- End items scope ----
+export interface ArrayYaml {
+  type: "array";
+  items: AnyYaml;
+}
+
+export default function convertArray(arr: any[], options: ConvertOptions): ArrayYaml {
+  return {
+    type: "array",
+    items: arr.length > 0 ? anyConversion(arr[0], options) : { type: "string" },
+  };
 }
