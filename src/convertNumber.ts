@@ -6,7 +6,7 @@ export interface NumberYaml {
   description?: string;
 }
 
-export default function convertNumber(_num: number, options: ConvertOptions): NumberYaml {
+export default function convertNumber(num: number, options: ConvertOptions): NumberYaml {
   /* 
   Append to 'outSwagger' string with Swagger schema attributes relative to given number
   Global variables updated: 
@@ -34,7 +34,7 @@ export default function convertNumber(_num: number, options: ConvertOptions): Nu
 
   return {
     type: "number",
-    ...(options.requestExamples ? { example: 1 } : {}),
+    ...(options.requestExamples ? { example: num } : {}),
     ...(options.addDescription ? { description: "" } : {}),
   };
 }

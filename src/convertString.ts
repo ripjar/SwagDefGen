@@ -19,7 +19,7 @@ export default function convertString(str: string, options: ConvertOptions): Str
     type: "string",
     ...(isDate ? { format: "date" } : {}),
     ...(isDateTime ? { format: "date-time" } : {}),
-    ...(options.requestExamples ? { example: "example" } : {}),
+    ...(options.requestExamples ? { example: str } : {}),
     ...(options.addDescription ? { description: "" } : {}),
   };
 }

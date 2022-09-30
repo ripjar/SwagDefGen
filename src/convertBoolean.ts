@@ -6,10 +6,10 @@ export interface BooleanYaml {
   description?: string;
 }
 
-export default function convertBoolean(_num: boolean, options: ConvertOptions): BooleanYaml {
+export default function convertBoolean(value: boolean, options: ConvertOptions): BooleanYaml {
   return {
     type: "boolean",
-    ...(options.requestExamples ? { example: true } : {}),
+    ...(options.requestExamples ? { example: value } : {}),
     ...(options.addDescription ? { description: "" } : {}),
   };
 }

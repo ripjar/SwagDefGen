@@ -3,6 +3,7 @@ import { ConvertOptions } from "./interface/ConvertOptions";
 
 export interface ObjectYaml {
   type: "object";
+  example?:  Record<string, any>
   properties: Record<string, AnyYaml>;
 }
 
@@ -15,6 +16,7 @@ export default function convertObject(
   }, {} as Record<string, AnyYaml>);
   return {
     type: "object",
+    ...(options.requestExamples ? { example: obj } : {}),
     properties: result,
   };
 }
